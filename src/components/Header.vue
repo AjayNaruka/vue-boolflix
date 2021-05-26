@@ -1,9 +1,9 @@
 <template>
   <div class="header d-flex align-items-center justify-content-between ps-5 pe-5">
-    <h1>BOOLFLIx</h1>
+    <h1>BOOLFLIX</h1>
     <div class="myInput">
       <form action="">
-        <input type="text" placeholder="Text" v-model="inputText">
+        <input type="text" placeholder="Cerca un film o serie" v-model="inputText">
         <button class="btn btn-primary ms-5" @click.prevent='ricerca'>INVIO</button>
       </form>
       
@@ -31,8 +31,16 @@ export default {
 
   .header{
     height: 80px;
-    background-color: red;
-    
+    background-color: black;
+    h1{
+      color:white
+    }
+    input{
+      border-radius: 15px;
+      padding: 8px;
+      border: 0;
+      outline: 0;
+    }
   }
 
 </style>

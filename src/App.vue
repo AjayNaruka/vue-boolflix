@@ -38,6 +38,8 @@ export default {
 
 <style lang="scss">
 
-  @import '@/assets/styles/general.scss'
-
+  @import '@/assets/styles/general.scss';
+  body{
+    background-color: #1B1B1B;
+  }
 </style>
