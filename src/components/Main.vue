@@ -1,5 +1,7 @@
 <template>
-  <div class="myContainer d-flex flex-wrap justify-content-center">
+  <div>
+    <!-- <h1>{{this.toSearch}}</h1> -->
+    <div class="myContainer d-flex flex-wrap justify-content-center">
     <h1 v-if="emptySearch" class="mt-5">CERCA UN FILM O SERIE</h1>
     <!-- <h1 v-if="noResults">NESSUN FILM TROVATO</h1> -->
     <div 
@@ -29,6 +31,8 @@
     </div>
     
   </div>
+  </div>  
+  
 </template>
 
 <script>

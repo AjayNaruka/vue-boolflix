@@ -11,8 +11,8 @@
 
 <script>
 
-import Main from '@/components/Main'
-import Header from '@/components/Header'
+import Main from './components/Main'
+import Header from './components/Header'
 
 export default {
   name: 'App',
@@ -38,7 +38,7 @@ export default {
 
 <style lang="scss">
 
-  @import '@/assets/styles/general.scss';
+  @import './assets/styles/general.scss';
   body{
     background-color: #1B1B1B;
   }
