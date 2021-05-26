@@ -2,7 +2,7 @@
   <div class="header d-flex align-items-center justify-content-between ps-5 pe-5">
     <h1>BOOLFLIX</h1>
     <div class="myInput">
-      <form action="">
+      <form action="" class="d-flex">
         <input type="text" placeholder="Cerca un film o serie" v-model="inputText">
         <button class="btn btn-primary ms-5" @click.prevent='ricerca'>INVIO</button>
       </form>
