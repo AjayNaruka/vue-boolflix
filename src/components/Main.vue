@@ -4,10 +4,10 @@
     v-for='(movie,index) in received'
     :key='index'
     class="carta">
-      <h3>{{movie.title}}</h3>
-      <h3>TEST</h3>
-      <h3>TEST</h3>
-      <h3>TEST</h3>
+      <h5>{{movie.title}}</h5>
+      <h5>{{movie.original_title}}</h5>
+      <h5>{{movie.original_language}}</h5>
+      <h5>{{movie.vote_average}}</h5>
     </div>
     
   </div>
@@ -22,8 +22,12 @@ export default {
   data(){
     return{
       received:[],
+      receivedMovies:[],
+      receivedSeries:[],
       apikey:'7b9e9b8d883ea487635e20b63041c707',
-      apiurl:'https://api.themoviedb.org/3/search/movie'
+      apiurl:'https://api.themoviedb.org/3/search/movie',
+      pageNumber:1,
+      isFirstCall: true
     }
   },
   props:{
@@ -31,12 +35,11 @@ export default {
   },
   watch:{
     toSearch:function(){
-      console.log('watching')
-      this.axiosCall()
+        this.received=[]
+        this.axiosCall()
     } 
   },
-  
-  
+
   methods:{
     axiosCall(){
       if(this.toSearch!=''){
@@ -44,15 +47,26 @@ export default {
         params:{
           api_key:this.apikey,
           query: this.toSearch,
-          language:'it-IT'
+          language:'it-IT',
+          page:this.pageNumber++,
         }
       })
       .then(res => {
-      this.received=res.data.results
-      console.log(res.data.results)
+      let toConcatArray=[]
+      this.maxpages=res.data.total_pages
+      toConcatArray=res.data.results
+      toConcatArray.forEach(element => {
+        this.received.push(element)
+      });
+      if(this.pageNumber<=res.data.total_pages){
+        this.axiosCall()
+      }else{
+        this.pageNumber=1
+      }
+      
       })
       .catch(() => {
-        
+        console.log('errore');
       })
       return 0
       }else{
@@ -60,14 +74,8 @@ export default {
         this.received=[]
       }
       }
-        
-      
-    
-  },
-  
-}
-
-  
+  }, 
+} 
 </script>
 
 <style lang="scss" scoped>
