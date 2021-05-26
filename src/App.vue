@@ -1,28 +1,43 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Header 
+    @inizioRicerca='inizioRicerca'
+    />
+    <Main :toSearch=this.toSearchText 
+        
+    />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import Main from '@/components/Main'
+import Header from '@/components/Header'
 
 export default {
   name: 'App',
+
+  data(){
+    return{
+      toSearchText:''
+    }
+  },
+
+  methods:{
+    inizioRicerca(text){
+      this.toSearchText=text
+    }
+  },
+
   components: {
-    HelloWorld
+    Header,
+    Main
   }
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
+  @import '@/assets/styles/general.scss'
+
 </style>
