@@ -21,7 +21,6 @@ export default {
   name:'Main',
   data(){
     return{
-      toSearchText:'',
       received:[],
       apikey:'7b9e9b8d883ea487635e20b63041c707',
       apiurl:'https://api.themoviedb.org/3/search/movie'
@@ -32,12 +31,8 @@ export default {
   },
   watch:{
     toSearch:function(){
-      console.log('watching');
-      
-        this.axiosCall()
-      console.log(this.received);
-      
-      
+      console.log('watching')
+      this.axiosCall()
     } 
   },
   
