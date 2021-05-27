@@ -5,7 +5,8 @@
       <form action="" class="d-flex">
         <input type="text" placeholder="Cerca un film o serie" v-model="inputText">
         <button class="btn btn-primary ms-5" @click.prevent='ricerca'>INVIO</button>
-        <i class="user-icon fas fa-user" @click='openLista()'></i>
+        <i class="user-icon fas fa-user" @click='openLista()'><span class="ms-2">{{this.userArray[this.activeHomeUser].name.toUpperCase()}}</span></i>
+        
         <div
         v-if="this.openList"
          class="user-list">
@@ -37,7 +38,7 @@ export default {
       },
       {
           name:'Paolo',
-          favGen:[35]
+          favGen:[36]
       },
       {
           name:'Luca',
