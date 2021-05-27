@@ -2,9 +2,11 @@
   <div id="app">
     <Header 
     @inizioRicerca='inizioRicerca'
+    @invioActive='invioActive'
     />
-    <Main :toSearch=this.toSearchText 
-        
+    <Main 
+    :toSearch=this.toSearchText 
+    :activeUser=this.currentUser
     />
   </div>
 </template>
@@ -19,13 +21,18 @@ export default {
 
   data(){
     return{
-      toSearchText:''
+      toSearchText:'',
+      currentUser:undefined
     }
   },
 
   methods:{
     inizioRicerca(text){
       this.toSearchText=text
+    },
+    invioActive(user){
+      console.log('user ricevuto: ',user);
+      this.currentUser=user
     }
   },
 
