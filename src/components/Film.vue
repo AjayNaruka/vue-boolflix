@@ -17,6 +17,17 @@
         v-for="index in Math.round(movie.vote_average/2)"
         :key="index"
         class="fas fa-star"></i>
+        <div class="star"
+        v-for="index in 5"
+        :key="index"
+        >
+          <i
+          v-if="index <Math.round(movie.vote_average/2)"
+           class="fas fa-star"></i>
+          <i class="far fa-star"
+          v-else
+          ></i>
+        </div>
         <p>{{movie.overview}}</p>
       </div>
     </div>

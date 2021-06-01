@@ -16,7 +16,7 @@
         <div
           v-for="(movie, index) in initial.slice(0, 4)"
           :key="index"
-          class="carta"
+          class="carta home"
         >
           <div class="poster">
             <img :src="getPoster(movie)" class="img-fluid" alt="" />
@@ -26,12 +26,19 @@
             <h5>{{ movie.name }}</h5>
             <h5>{{ movie.original_title }}</h5>
             <h5>{{ movie.original_name }}</h5>
+            <h5>Attore: {{ stampaAttori(movie.id)}} </h5>
             <h5><img class="countryFlag" :src="getLangImg(movie)" alt="" /></h5>
-            <i
-              v-for="index in Math.round(movie.vote_average / 2)"
-              :key="index"
-              class="fas fa-star"
-            ></i>
+            <div class="stars"
+        v-for="index in 5"
+        :key="index"
+        >
+          <i
+          v-if="index <Math.round(movie.vote_average/2)"
+           class="fas fa-star"></i>
+          <i class="far fa-star"
+          v-else
+          ></i>
+        </div>
             <p>{{ movie.overview }}</p>
           </div>
         </div>
@@ -55,12 +62,24 @@
           <h5>{{ movie.name }}</h5>
           <h5>{{ movie.original_title }}</h5>
           <h5>{{ movie.original_name }}</h5>
+          <h5>Attore: {{ stampaAttori(movie.id)}} </h5>
           <h5><img class="countryFlag" :src="getLangImg(movie)" alt="" /></h5>
-          <i
+          <!-- <i
             v-for="index in Math.round(movie.vote_average / 2)"
             :key="index"
             class="fas fa-star"
+          ></i> -->
+          <div class="stars"
+        v-for="index in 5"
+        :key="index"
+        >
+          <i
+          v-if="index <Math.round(movie.vote_average/2)"
+           class="fas fa-star"></i>
+          <i class="far fa-star"
+          v-else
           ></i>
+        </div>
           <p>{{ movie.overview }}</p>
         </div>
       </div>
@@ -150,6 +169,35 @@ export default {
     }
   },
   methods: {
+
+    stampaAttori(id){
+      let actors =[]
+      let actorsNames=[]
+      let primoAttore = ''
+      axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=7b9e9b8d883ea487635e20b63041c707`)
+      .then(res => {
+        actors = res.data.cast
+        console.log(id,actors);
+        actors.forEach((element,index) => {
+          if(index===0){
+            console.log('elemento : ',element.name);
+          }
+          actorsNames.push(element.name)
+          /* console.log(actorsNames); */
+        });
+        console.log('primo: ',actorsNames[0]);
+        primoAttore = actorsNames[0]
+        console.log(primoAttore);
+        
+      })
+      .catch(() => {
+        console.error('errore'); 
+        return 0
+      })
+
+      return primoAttore
+    },
+
     axiosCall() {
       if (this.toSearch != "") {
         this.emptySearch = false;
@@ -167,7 +215,7 @@ export default {
             console.log("sto cercando: ", this.toSearch);
             this.received = res.data.results;
             console.log(this.received);
-            /* if(this.pageNumber<=res.data.total_pages){
+           /*  if(this.pageNumber<=res.data.total_pages){
         this.axiosCall()
       }else{
         this.pageNumber=1
@@ -210,6 +258,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.stars{
+  display: inline-block;
+}
 .filterSelect {
   position: absolute;
   right: 150px;
@@ -246,9 +297,14 @@ export default {
     margin-bottom: 20px;
     overflow: hidden;
     max-height: 513px;
+    /* min-height: 400px; */
 
+    .poster{
+      height: 100%;
+    }
     .poster img {
-      width: 100%;
+      width:100%;
+      width: auto;
       transition: all 0.7s;
     }
     &:hover .poster img {
@@ -291,6 +347,9 @@ export default {
 }
 @media all and (min-width: 1101px) {
   .carta {
+    flex-basis: calc(100% / 6);
+  }
+  .carta.home{
     flex-basis: calc(100% / 5);
   }
 }

@@ -34,7 +34,13 @@ export default {
       userArray:[
         {
           name:'Ajay',
-          favGen:[12]
+          favGen:[12],
+          stillWatching:[
+            {
+              id:20,
+              timeWatched:50
+            }
+          ]
       },
       {
           name:'Paolo',
